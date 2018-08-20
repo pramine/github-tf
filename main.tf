@@ -40,7 +40,7 @@ variable newhire_username {
 # can create their own pull request.
 resource "github_membership" "newhire_org_membership" {
   username = "${var.newhire_username}"
-  role     = "admin" # todo: change to member
+  role     = "admin"                   # todo: change to member
 }
 
 # Operator adds the new hire to the team with write permissions
@@ -48,5 +48,13 @@ resource "github_membership" "newhire_org_membership" {
 resource "github_team_membership" "newhire_tf_writers" {
   team_id  = "${github_team.github_tf_writers.id}"
   username = "${var.newhire_username}"
-  role     = "maintainer" # todo: change to member
+  role     = "maintainer"                          # todo: change to member
+}
+
+# New hire creates their own pull request to add themselves
+# to their team's github team.
+resource "github_team_membership" "newhire_team_membership" {
+  team_id  = "${github_team.newhire_team.id}"
+  username = "${var.newhire_username}"
+  role     = "member"
 }
