@@ -17,6 +17,13 @@ resource "github_team" "github_tf_writers" {
   privacy     = "closed"
 }
 
+# Team the newhire should be on.
+resource "github_team" "newhire_team" {
+  name        = "newhire_team"
+  description = "newhire_team"
+  privacy     = "closed"
+}
+
 # Give the github-tf-writers team permissions to write to the runatlantis/github-tf
 # repo.
 resource "github_team_repository" "github_tf_writers" {
@@ -26,7 +33,7 @@ resource "github_team_repository" "github_tf_writers" {
 }
 
 variable newhire_username {
-  default = "newhire"
+  default = "lkysow"
 }
 
 # Operator adds the newhire to the organization so they
